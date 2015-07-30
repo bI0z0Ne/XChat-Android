@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import xyz.xfans.xchat.android.app.R;
+import xyz.xfans.xchat.android.app.app.BaseActivity;
 import xyz.xfans.xchat.android.app.ui.adapter.MyViewPagerAdapter;
 import xyz.xfans.xchat.android.app.ui.fragment.FriendsFragment;
 

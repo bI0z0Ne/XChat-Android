@@ -1,4 +1,4 @@
-package xyz.xfans.xchat.android.app.ui.activity;
+package xyz.xfans.xchat.android.app.app;
 
 import android.support.v7.app.AppCompatActivity;
 
