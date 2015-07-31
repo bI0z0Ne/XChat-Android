@@ -82,6 +82,8 @@ public class LoginActivity extends BaseActivity {
         String name = mNameView.getText().toString().trim();
         String pwd = mPasswordView.getText().toString().trim();
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(pwd)){
+            Snackbar.make(loginForm, "请输入用户名密码", Snackbar.LENGTH_LONG)
+                    .show();
             return;
         }
         //TODO 登录
