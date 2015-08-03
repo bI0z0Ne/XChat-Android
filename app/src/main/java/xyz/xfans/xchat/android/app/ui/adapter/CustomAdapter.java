@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.xfans.xchat.android.app.R;
 
 /**
@@ -38,6 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        private final CircleImageView circleImageView;
 
         public ViewHolder(View v) {
             super(v);
@@ -48,11 +50,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                     Log.d(TAG, "Element " + getPosition() + " clicked.");
                 }
             });
-            textView = (TextView) v.findViewById(R.id.textView);
+            textView = (TextView) v.findViewById(R.id.title);
+            circleImageView = (CircleImageView) v.findViewById(R.id.avatar);
         }
 
         public TextView getTextView() {
             return textView;
+        }
+
+        public CircleImageView getCircleImageView() {
+            return circleImageView;
         }
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
@@ -87,6 +94,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         viewHolder.getTextView().setText(mDataSet[position]);
+        viewHolder.getCircleImageView().setImageResource(R.drawable.avatar_empty);
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
