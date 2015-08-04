@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -19,7 +20,9 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 import xyz.xfans.xchat.android.app.R;
 import xyz.xfans.xchat.android.app.app.BaseActivity;
+import xyz.xfans.xchat.android.app.app.BaseApp;
 import xyz.xfans.xchat.android.app.config.UrlConfig;
+import xyz.xfans.xchat.android.app.entity.UserInfo;
 
 
 /**
@@ -27,13 +30,6 @@ import xyz.xfans.xchat.android.app.config.UrlConfig;
  */
 public class LoginActivity extends BaseActivity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     // UI references.
     private EditText mNameView;
     private EditText mPasswordView;
@@ -83,8 +79,8 @@ public class LoginActivity extends BaseActivity {
         String name = mNameView.getText().toString().trim();
         String pwd = mPasswordView.getText().toString().trim();
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(pwd)){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
             Snackbar.make(loginForm, "请输入用户名密码", Snackbar.LENGTH_LONG)
                     .show();
             return;
@@ -103,8 +99,13 @@ public class LoginActivity extends BaseActivity {
                     JSONObject jsonObject = new JSONObject(resp);
                     int status = jsonObject.getInt("status");
                     if(status == 1){
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                        startActivity(intent);
+                        Gson gson = new Gson();
+                        String userStr = jsonObject.getString("data");
+                        UserInfo userInfo = gson.fromJson(userStr, UserInfo.class);
+                        BaseApp baseApp = (BaseApp) getApplication();
+                        baseApp.setUserInfo(userInfo);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
                     }else {
                         Snackbar.make(loginForm, "用户名或密码错误", Snackbar.LENGTH_LONG)
                                 .show();

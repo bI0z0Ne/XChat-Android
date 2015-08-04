@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import xyz.xfans.xchat.android.app.R;
 import xyz.xfans.xchat.android.app.app.BaseActivity;
+import xyz.xfans.xchat.android.app.app.BaseApp;
+import xyz.xfans.xchat.android.app.entity.UserInfo;
 import xyz.xfans.xchat.android.app.ui.adapter.MyViewPagerAdapter;
 import xyz.xfans.xchat.android.app.ui.fragment.FriendsFragment;
 
@@ -44,6 +46,15 @@ public class MainActivity extends BaseActivity implements FriendsFragment.OnFrag
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BaseApp baseApp = (BaseApp) getApplication();
+        UserInfo userInfo = baseApp.getUserInfo();
+        if(userInfo != null){
+            toolbar.setTitle(userInfo.getName());
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

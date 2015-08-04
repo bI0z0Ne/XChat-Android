@@ -1,9 +1,11 @@
 package xyz.xfans.xchat.android.app.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by zhu on 2015/8/4.
  */
-public class UserInfo {
+public class UserInfo implements Serializable{
     private String id;
     private String name;
     private String pwd;
