@@ -16,6 +16,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
+import org.json.JSONObject;
 import xyz.xfans.xchat.android.app.R;
 import xyz.xfans.xchat.android.app.app.BaseActivity;
 import xyz.xfans.xchat.android.app.config.UrlConfig;
@@ -82,6 +83,8 @@ public class LoginActivity extends BaseActivity {
         String name = mNameView.getText().toString().trim();
         String pwd = mPasswordView.getText().toString().trim();
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(pwd)){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
             Snackbar.make(loginForm, "请输入用户名密码", Snackbar.LENGTH_LONG)
                     .show();
             return;
@@ -90,24 +93,36 @@ public class LoginActivity extends BaseActivity {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("name",name);
-        params.put("pwd",pwd);
-        asyncHttpClient.post(this, UrlConfig.LOGIN, new RequestParams(), new AsyncHttpResponseHandler() {
+        params.put("pwd", pwd);
+        asyncHttpClient.post(this, UrlConfig.LOGIN, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                System.out.println("LoginActivity.onSuccess");
-                Snackbar.make(loginForm, "登录失败", Snackbar.LENGTH_LONG)
-                        .show();
+                String resp = new String(responseBody);
+                System.out.println("LoginActivity.onSuccess:" + resp);
+                try {
+                    JSONObject jsonObject = new JSONObject(resp);
+                    int status = jsonObject.getInt("status");
+                    if(status == 1){
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        startActivity(intent);
+                    }else {
+                        Snackbar.make(loginForm, "用户名或密码错误", Snackbar.LENGTH_LONG)
+                                .show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Snackbar.make(loginForm, "用户名或密码错误", Snackbar.LENGTH_LONG)
+                            .show();
+                }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                System.out.println("LoginActivity.onFailure");
+                System.out.println("LoginActivity.onFailure:"+statusCode+":"+error.getMessage());
                 Snackbar.make(loginForm, "登录失败", Snackbar.LENGTH_LONG)
                         .show();
             }
         });
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
     }
 
 }
