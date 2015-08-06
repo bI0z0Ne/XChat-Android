@@ -19,5 +19,8 @@
             android:gravity="right|center_vertical"
             android:textSize="16sp"
             android:layout_toLeftOf="@+id/avatar"
-            android:paddingRight="8dp"/>
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/msg_content"/>
 </RelativeLayout>
