@@ -5,5 +5,8 @@
     <color name="material_green_A200">#69F0AE</color>
     <color name="tab_text">#b2ffffff</color>
     <color name="tab_text_act">#ffffff</color>
+    <drawable name="send_bg_pressed">#1976D2</drawable>
+    <drawable name="send_bg_hovered">#1E88E5</drawable>
+    <drawable name="send_bg_normal">#2196F3</drawable>
 
 </resources>
