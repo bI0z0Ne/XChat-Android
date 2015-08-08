@@ -1,4 +1,4 @@
-package xyz.xfans.xchat.android.app.service;
+package xyz.xfans.xchat.android.app.message;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;

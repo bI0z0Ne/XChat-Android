@@ -8,6 +8,7 @@ import org.apache.mina.core.service.IoConnector;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
+import xyz.xfans.xchat.android.app.message.MsgCodecFactory;
 
 import java.net.InetSocketAddress;
 
