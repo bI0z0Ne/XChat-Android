@@ -38,16 +38,16 @@
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/abc_text_size_button_material"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/send_btn"
+                android:layout_toLeftOf="@+id/tv_send"
                 android:layout_marginLeft="8dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:id="@+id/editText"/>
+                android:id="@+id/et_msg"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:minWidth="64dp"
-                android:id="@+id/send_btn"
+                android:id="@+id/tv_send"
                 android:gravity="center"
                 android:textSize="@dimen/abc_text_size_button_material"
                 android:layout_marginLeft="8dp"
